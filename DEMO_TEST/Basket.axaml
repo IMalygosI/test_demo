@@ -1,0 +1,199 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="700" d:DesignHeight="950"
+		MaxHeight="950" MaxWidth="700"
+		MinHeight="950" MinWidth="700"
+		WindowStartupLocation="CenterScreen"
+		x:CompileBindings="False"
+        x:Class="DEMO_TEST.Basket"
+        Title="Basket">
+
+	<Grid ShowGridLines="False"
+		  ColumnDefinitions="*,*,*"
+		  RowDefinitions="*,15*,*"
+		  Background="Wheat">
+
+		<TextBlock Grid.Column="1"
+				   Grid.Row="0"
+				   HorizontalAlignment="Center"
+				   VerticalAlignment="Center"
+				   FontWeight="Bold"
+				   FontSize="22"
+				   Text="Заказ"/>
+
+		<Button Name="spisokTovats"
+				Grid.Column="2"
+				VerticalAlignment="Top"
+				Margin="10"
+				Background="Brown"
+				HorizontalAlignment="Right">
+			<TextBlock Text="Вернуться к покупкам"
+					   Foreground="White"/>
+		</Button>
+
+		<Button Name="oplata"
+				Grid.Column="2"
+				Grid.Row="2"
+				Background="Green"
+				HorizontalAlignment="Right"
+				VerticalAlignment="Bottom"
+				Margin="0 0 10 25">
+			<TextBlock Text="Оплатить"
+					   Foreground="White"/>
+		</Button>
+
+		<ComboBox Grid.Column="0"
+				  Grid.Row="0"
+				  Name="ComBox"
+				  Width="210"
+				  VerticalAlignment="Center"
+				  Margin="10 0 0 0 ">
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding Name}"/>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+
+		<DockPanel Grid.Column="0"
+				   Grid.Row="2"
+				   Margin="10 0 0 0"
+				   VerticalAlignment="Top"
+				   HorizontalAlignment="Left">
+			<TextBlock Text="Сумма заказа:"
+					   FontWeight="Bold"/>
+			<TextBlock Name="Summa"
+					   VerticalAlignment="Center"
+					   Text=""
+					   Margin="5 0 0 0"/>
+		</DockPanel>
+		
+		<ListBox Grid.ColumnSpan="3"
+				 Grid.Row="1"
+				 Margin="10"
+				 BorderThickness="0.9"
+				 BorderBrush="Black"
+				 Name="List_Box_Korz"
+				 Background="Azure">
+			<ListBox.ContextMenu>
+				<ContextMenu>
+					<MenuItem Header="Удалить из корзины"
+							  Name="DeleteInBasket"/>
+				</ContextMenu>
+			</ListBox.ContextMenu>
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Border BorderThickness="0.9 0 0 0.9"
+							BorderBrush="Black">
+						<Grid ShowGridLines="False"
+							  ColumnDefinitions="0.9*,0.6*,*,*"
+							  RowDefinitions="20, 20, 30,80">
+							<Border Grid.Column="1"
+									Grid.RowSpan="4"
+									BorderBrush="Black"
+									BorderThickness="0.9 0 0.9 0">
+							</Border>
+							<Border Grid.Column="3"
+									Grid.RowSpan="4"
+									BorderBrush="Black"
+									BorderThickness="0.9 0 0.9 0">
+							</Border>
+
+							<TextBlock Text="{Binding Count}"
+									   Name="numbe"
+									   Grid.Column="3"
+									   Grid.Row="3"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Center"/>
+			
+								<Button Name="minus"
+									Grid.Column="3" 
+									Tag="{Binding Id}"
+									Grid.Row="3"
+									Margin="0 0 70 0"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Center"
+									Click="minus_Click">
+								<TextBlock Text="⯇"/>
+							</Button>
+
+							<TextBlock Grid.Column="1"
+									   Grid.Row="0"
+									   Margin="5 0 0 0"
+									   FontWeight="Bold"
+									   Text="Название:"/>
+
+							<TextBlock Grid.Column="1"
+									   Grid.Row="2"
+									   FontWeight="Bold"
+									   Margin="5 0 0 0"
+									   Text="Описание:"/>
+
+							<TextBlock Grid.Column="1"
+									   Grid.Row="1"
+									   FontWeight="Bold"
+									   Margin="5 0 0 0"
+									   Text="Цена:"/>
+
+							<TextBlock Grid.Column="3"
+									   Grid.Row="0"
+									   VerticalAlignment="Center"
+									   FontWeight="Bold"
+									   HorizontalAlignment="Center"
+									   Margin="5 0 0 0"
+									   Text="Производитель"/>
+
+							<TextBlock Grid.Column="1"
+									   Grid.Row="3"
+									   VerticalAlignment="Top"
+									   FontWeight="Bold"
+									   HorizontalAlignment="Left"
+									   Margin="5 0 0 0"
+									   Text="Скидка:"/>
+
+							<Image Source="{Binding Image}"
+								   Grid.Column="0"
+								   Grid.RowSpan="4"
+								   Margin="5 0 0 0"/>
+
+							<TextBlock Text="{Binding Name}"
+									   Grid.Column="2"
+									   FontWeight="Bold"
+									   Grid.Row="0"
+									   Margin="5 0 0 0"/>
+
+							<TextBlock Text="{Binding Skidka, StringFormat={}{0}%}}"
+									   Grid.Column="2"
+									   FontWeight="Bold"
+									   Grid.Row="3"
+									   Margin="5 0 0 0"/>
+
+							<TextBlock Text="{Binding Opisanie}"
+									   Grid.Column="2"
+									   FontWeight="Bold"
+									   Grid.Row="2"
+									   TextWrapping="Wrap"
+									   Margin="5 0 0 0"/>
+
+							<TextBlock Text= "{Binding Prise, StringFormat={}{0} RUB}}"
+									   Grid.Column="2"
+									   Grid.Row="1"
+									   FontWeight="Bold"
+									   Margin="5 0 0 0"/>
+
+							<TextBlock Text="{Binding Manufacturer}"
+									   FontWeight="Bold"
+									   Grid.Column="3"
+									   Grid.Row="1"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Top"
+									   Margin="5 0 0 0"/>
+						</Grid>
+					</Border>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+	</Grid>
+</Window>
